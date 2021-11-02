@@ -1,4 +1,4 @@
-package com.example.timer
+package com.example.timer.adapters
 
 import android.os.CountDownTimer
 import android.view.LayoutInflater
@@ -7,10 +7,13 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
+import com.example.timer.R
+import com.example.timer.data.Task
 import kotlinx.android.synthetic.main.item_row.view.*
 
-class RVAdapter( val list: List<Task>) : RecyclerView.Adapter<RVAdapter.ItemViewHolder>() {
-    //lateinit var tv:TextView
+class TasksAdapter(private var tasksList: List<Task>) :
+    RecyclerView.Adapter<TasksAdapter.ItemViewHolder>() {
+
     var start = 600000L
     var timeRun: Boolean = false
     lateinit var countDownTimer: CountDownTimer
@@ -28,41 +31,29 @@ class RVAdapter( val list: List<Task>) : RecyclerView.Adapter<RVAdapter.ItemView
     }
 
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
-        val data = list[position]
-
-       // val text = updatTimer()
-
-
+        val data = tasksList[position]
         holder.itemView.apply {
-
-
-            textView.text = "${data.task}"
-            textView2.text="${data.description}"
-            linear.setOnClickListener {
+            tv_taskTitle.text = "${data.task}"
+            tv_taskDescription.text = "${data.description}"
+            ll_item_row.setOnClickListener {
                 tv.isVisible = true
                 timeRun = !timeRun
                 println(timeRun)
                 startStop(tv)
-
-
-
             }
-
-            //    delbtn.setOnClickListener(){
-            //                activity. confirmAlert(data.id)
-            //
-            //            }
-            //            editbtn.setOnClickListener {
-            //                activity.customAlert(data.id)
-            //            }
 
         }
     }
 
-    override fun getItemCount(): Int = list.size
+    override fun getItemCount(): Int = tasksList.size
 
-   fun startStop(tv: TextView) {
-       startTimer(tv)
+    fun setData(tasks: List<Task>){
+        this.tasksList = tasks
+        notifyDataSetChanged()
+    }
+
+    private fun startStop(tv: TextView) {
+        startTimer(tv)
     }
 
     private fun startTimer(tv: TextView) {
@@ -75,7 +66,7 @@ class RVAdapter( val list: List<Task>) : RecyclerView.Adapter<RVAdapter.ItemView
             //
             override fun onTick(millisUntilFinished: Long) {
                 start = millisUntilFinished
-                updatTimer(tv)
+                updateTimer(tv)
             }
 
         }.start()
@@ -87,7 +78,7 @@ class RVAdapter( val list: List<Task>) : RecyclerView.Adapter<RVAdapter.ItemView
         timeRun = false
     }
 
-    fun updatTimer(tv: TextView) {
+    fun updateTimer(tv: TextView) {
         var min = start / 60000
         val sec = start % 60000 / 1000
 

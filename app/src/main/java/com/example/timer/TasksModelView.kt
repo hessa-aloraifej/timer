@@ -2,14 +2,13 @@ package com.example.timer
 
 import android.app.Application
 import android.util.Log
-import android.widget.Toast
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
-import com.google.firebase.firestore.*
+import com.example.timer.data.Task
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
-class MyVM (application: Application): AndroidViewModel(application) {
+class TasksModelView (application: Application): AndroidViewModel(application) {
     var TAG: String = "IAmMainActivity"
     var db = Firebase.firestore
     val list: MutableLiveData<List<Task>> = MutableLiveData()
@@ -23,7 +22,7 @@ class MyVM (application: Application): AndroidViewModel(application) {
         return list
     }
 
-    fun save( task: String,description:String) {
+    fun saveTask(task: String, description:String) {
 
 
         val task = hashMapOf(
