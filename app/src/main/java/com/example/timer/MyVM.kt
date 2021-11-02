@@ -59,7 +59,7 @@ class MyVM (application: Application): AndroidViewModel(application) {
                         "descriptionText" -> description = value as String
                         }
                     }
-                  tasks.add(Task(task_name,description))
+                  tasks.add(Task(task_name,description,""))
                 }
                 list.postValue(tasks)
 

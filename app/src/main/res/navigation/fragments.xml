@@ -3,16 +3,36 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/fragments"
-    app:startDestination="@id/hoomeFragment">
+    app:startDestination="@id/homeFragment">
 
     <fragment
-        android:id="@+id/hoomeFragment"
-        android:name="com.example.timer.HoomeFragment"
-        android:label="fragment_hoome"
-        tools:layout="@layout/fragment_hoome" />
+        android:id="@+id/homeFragment"
+        android:name="com.example.timer.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_listFragment"
+            app:destination="@id/listFragment" />
+    </fragment>
     <fragment
-        android:id="@+id/viewTaskFragment"
-        android:name="com.example.timer.ViewTaskFragment"
-        android:label="fragment_view_task"
-        tools:layout="@layout/fragment_view_task" />
+        android:id="@+id/listFragment"
+        android:name="com.example.timer.ListFragment"
+        android:label="fragment_list"
+        tools:layout="@layout/fragment_list" >
+        <action
+            android:id="@+id/action_listFragment_to_addFragment"
+            app:destination="@id/addFragment" />
+        <action
+            android:id="@+id/action_listFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addFragment"
+        android:name="com.example.timer.AddFragment"
+        android:label="fragment_add"
+        tools:layout="@layout/fragment_add" >
+        <action
+            android:id="@+id/action_addFragment_to_listFragment"
+            app:destination="@id/listFragment" />
+    </fragment>
 </navigation>
