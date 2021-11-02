@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/fragments"
+    app:startDestination="@id/hoomeFragment">
+
+    <fragment
+        android:id="@+id/hoomeFragment"
+        android:name="com.example.timer.HoomeFragment"
+        android:label="fragment_hoome"
+        tools:layout="@layout/fragment_hoome" />
+    <fragment
+        android:id="@+id/viewTaskFragment"
+        android:name="com.example.timer.ViewTaskFragment"
+        android:label="fragment_view_task"
+        tools:layout="@layout/fragment_view_task" />
+</navigation>
