@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.ListFragment">
+    tools:context=".AddTaskActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -30,6 +30,14 @@
             android:ems="10"
             android:hint="Enter Description Of Task"
             android:inputType="textPersonName" />
+
+        <EditText
+            android:id="@+id/edt_taskExpectedTime"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Enter Expected Time Of Task"
+            android:inputType="time" />
 
         <Button
             android:id="@+id/btn_add"

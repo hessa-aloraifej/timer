@@ -10,6 +10,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Timer">
         <activity
+            android:name=".TimerDetailsActivity"
+            android:exported="true" />
+        <activity
+            android:name=".HomeActivity"
+            android:exported="true" />
+        <activity
             android:name=".ListTaskActivity"
             android:exported="true" />
         <activity
