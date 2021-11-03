@@ -22,12 +22,16 @@ class TasksModelView (application: Application): AndroidViewModel(application) {
         return list
     }
 
-    fun saveTask(task: String, description:String) {
+    fun saveTask(taskId:String,task: String, description:String,expectedTime:String,spentTime:String) {
 
 
         val task = hashMapOf(
+            "taskId" to taskId,
             "taskText" to task,
-            "descriptionText" to description
+            "descriptionText" to description,
+            " expectedTime"  to expectedTime,
+            "spentTime" to spentTime,
+
 
             )
 
@@ -58,7 +62,7 @@ class TasksModelView (application: Application): AndroidViewModel(application) {
                         "descriptionText" -> description = value as String
                         }
                     }
-                  tasks.add(Task(task_name,description,""))
+                  tasks.add(Task(document.id,task_name,description,"",""))
                 }
                 list.postValue(tasks)
 
@@ -78,26 +82,7 @@ class TasksModelView (application: Application): AndroidViewModel(application) {
 
 
 
- //   fun readFireStoreData() {
-    //        val db = FirebaseFirestore.getInstance()
-    //        db.collection("Task")
-    //            .get()
-    //            .addOnCompleteListener {
-    //
-    //                val result: StringBuffer = StringBuffer()
-    //
-    //                if(it.isSuccessful) {
-    //                    for(document in it.result!!) {
-    //                        val taskn=result.append(document.data.getValue("taskText")).append().toString()
-    //                        val taskdes= result.append(document.data.getValue("descriptionText")).append().toString()
-    //
-    //                        tasks.add(Task(document.id,taskn,taskdes))
-    //                    }
-    //
-    //                }
-    //            }
-    //
-    //    }
+
 
 
 

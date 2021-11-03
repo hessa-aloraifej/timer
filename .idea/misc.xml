@@ -7,8 +7,11 @@
         <entry key="app/src/main/res/drawable/bg_round_purple.xml" value="0.2609375" />
         <entry key="app/src/main/res/drawable/bg_round_teal.xml" value="0.2609375" />
         <entry key="app/src/main/res/drawable/bg_rounded.xml" value="0.2609375" />
+        <entry key="app/src/main/res/layout/activity_add_task.xml" value="0.1734375" />
+        <entry key="app/src/main/res/layout/activity_list_task.xml" value="0.159375" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_view_tasks.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/add_task_alert.xml" value="0.18020833333333333" />
         <entry key="app/src/main/res/layout/ca.xml" value="0.24479166666666666" />
         <entry key="app/src/main/res/layout/fragment_add.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.25" />
