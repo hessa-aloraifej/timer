@@ -13,5 +13,8 @@ class HomeActivity : AppCompatActivity() {
         btn_home_track.setOnClickListener{
             startActivity(Intent(this, TrackActivity::class.java))
         }
+        listTaskBtn.setOnClickListener{
+            startActivity(Intent(this, ListTaskActivity::class.java))
+        }
     }
 }

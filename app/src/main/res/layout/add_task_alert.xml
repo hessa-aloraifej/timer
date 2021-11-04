@@ -32,13 +32,30 @@
             android:hint="Enter Description Of Task"
             android:inputType="textPersonName" />
 
-        <EditText
-            android:id="@+id/edt_taskExpectedTimeAlert"
+
+        <LinearLayout
+
+            android:id="@+id/linearLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="Enter Expected Time Of Task"
-            android:inputType="time" />
+            android:orientation="horizontal">
+
+            <SeekBar
+                android:id="@+id/seekBarTimer"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:max="100"
+                android:min="10"
+                android:progress="10"
+
+                />
+
+            <TextView
+                android:id="@+id/tvExpectedTimeTask"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
 
         <Button
             android:id="@+id/btn_addAlert"
@@ -48,3 +65,4 @@
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
+
