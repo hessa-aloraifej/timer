@@ -28,7 +28,7 @@ class MainActivity : AppCompatActivity() {
 
         val readInstructions = sharedPreferences.getInt("read", 0)
 
-        if (readInstructions > 0) {
+        if (readInstructions == 0) {
             main_screen.visibility = View.VISIBLE
             generate()
 

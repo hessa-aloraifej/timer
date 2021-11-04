@@ -10,12 +10,12 @@
     android:gravity="center">
 
     <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/listTaskBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="kefn"
-        android:textColor="@color/white"
         android:background="@drawable/bg_blue_purple_gradient"
-        />
+        android:text="View Task List"
+        android:textColor="@color/white" />
 
     <View
         android:layout_width="wrap_content"

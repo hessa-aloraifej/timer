@@ -3,10 +3,7 @@ package com.example.timer
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Button
-import android.widget.EditText
-import android.widget.ImageButton
-import android.widget.Toast
+import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
@@ -59,22 +56,37 @@ class ListTaskActivity : AppCompatActivity() {
 
         val taskNameAlert = view.findViewById<EditText>(R.id.edt_taskNameAlert)
         val taskDescriptionAlert = view.findViewById<EditText>(R.id.edt_taskDescriptionAlert)
-        val taskExpectedTimeAlert = view.findViewById<EditText>(R.id.edt_taskExpectedTimeAlert)
+        //val taskExpectedTimeAlert = view.findViewById<EditText>(R.id.edt_taskExpectedTimeAlert)
+        val seekBarTimer=view.findViewById<SeekBar>(R.id.seekBarTimer)
+        val tvExpectedTimeTask=view.findViewById<TextView>(R.id.tvExpectedTimeTask)
 
         val addBtnAlert = view.findViewById<Button>(R.id.btn_addAlert)
 
         taskNameAlert.setHint("Enter Task Name")
         taskDescriptionAlert.setHint("Enter Task Description")
-        taskExpectedTimeAlert.setHint("Enter Task Expected Time As Minutes")
-
+        //taskExpectedTimeAlert.setHint("Enter Task Expected Time As Minutes")
 
         alertDialog.show()
 
+        seekBarTimer.setOnSeekBarChangeListener(object: SeekBar.OnSeekBarChangeListener{
+            override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
+                tvExpectedTimeTask.text=progress.toString()
+            }
 
+            override fun onStartTrackingTouch(seekBar: SeekBar?) {
+
+            }
+
+            override fun onStopTrackingTouch(seekBar: SeekBar?) {
+
+            }
+
+        })
         addBtnAlert.setOnClickListener {
             var taskName=taskNameAlert.text.toString()
             var taskDescription=taskDescriptionAlert.text.toString()
-            var taskExpectedTime=taskExpectedTimeAlert.text.toString()
+           // var taskExpectedTime=taskExpectedTimeAlert.text.toString()
+            var taskExpectedTime=tvExpectedTimeTask.text.toString()
 
 
            if(taskName.isNotEmpty() && taskDescription.isNotEmpty() && taskExpectedTime.isNotEmpty() ) {
@@ -94,3 +106,10 @@ class ListTaskActivity : AppCompatActivity() {
 
 
 }
+
+
+
+
+
+
+
