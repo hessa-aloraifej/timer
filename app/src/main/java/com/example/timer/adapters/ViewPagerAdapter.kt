@@ -43,6 +43,7 @@ class ViewPagerAdapter(private val slides: List<SlideData>, val ctx: MainActivit
             }
             if(position == slides.size - 1){
                 tv_pagerRecycler_start.visibility = View.VISIBLE
+                tv_pagerRecycler_skip.visibility = View.INVISIBLE
                 tv_pagerRecycler_start.setOnClickListener {
                     ctx.skipOrFinish()
                 }
