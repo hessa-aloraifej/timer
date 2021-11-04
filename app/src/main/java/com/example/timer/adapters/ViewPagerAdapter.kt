@@ -43,21 +43,9 @@ class ViewPagerAdapter(private val slides: List<SlideData>, val ctx: MainActivit
             }
             if(position == slides.size - 1){
                 tv_pagerRecycler_start.visibility = View.VISIBLE
-                val spannableText = SpannableString(tv_pagerRecycler_start.text)
-                val clickableSpan: ClickableSpan = object : ClickableSpan() {
-                    override fun onClick(textView: View) {
-                        ctx.skipOrFinish()
-                    }
-
-                    override fun updateDrawState(ds: TextPaint) {
-                        super.updateDrawState(ds)
-                        ds.isUnderlineText = false
-                    }
+                tv_pagerRecycler_start.setOnClickListener {
+                    ctx.skipOrFinish()
                 }
-
-                spannableText.setSpan(clickableSpan, 0, tv_pagerRecycler_start.text.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
-                tv_pagerRecycler_start.text = spannableText
-                tv_pagerRecycler_start.movementMethod = LinkMovementMethod.getInstance()
             }
         }
 
