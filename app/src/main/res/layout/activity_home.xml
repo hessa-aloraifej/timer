@@ -1,34 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".HomeActivity"
-    android:orientation="vertical"
-    android:gravity="center">
+    android:background="@drawable/bg_blue_purple_gradient"
+    tools:context=".HomeActivity">
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/listTaskBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/bg_blue_purple_gradient"
-        android:text="View Task List"
-        android:textColor="@color/white" />
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/bg_main" />
 
-    <View
-        android:layout_width="wrap_content"
-        android:layout_height="10dp"
-        />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical">
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btn_home_track"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Track"
-        android:textColor="@color/white"
-        android:background="@drawable/bg_blue_purple_gradient"
-        />
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/listTaskBtn"
+            android:layout_width="160dp"
+            android:layout_height="40dp"
+            android:layout_marginVertical="10dp"
+            android:background="@drawable/bg_rounded"
+            android:text="My Tasks"
+            android:textSize="18dp"
+            android:textAllCaps="false"
+            android:textColor="@color/blue_200" />
 
-</LinearLayout>
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_home_track"
+            android:layout_width="160dp"
+            android:layout_height="40dp"
+            android:background="@drawable/bg_rounded"
+            android:text="My Progress"
+            android:textSize="18dp"
+            android:textAllCaps="false"
+            android:textColor="@color/blue_200" />
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
