@@ -111,8 +111,6 @@ class ListTaskActivity : AppCompatActivity() {
             tasksAdapter.setData(list)
         })
     }
-
-
 }
 
 
