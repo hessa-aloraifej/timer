@@ -87,10 +87,11 @@ class ListTaskActivity : AppCompatActivity() {
             var taskDescription=taskDescriptionAlert.text.toString()
            // var taskExpectedTime=taskExpectedTimeAlert.text.toString()
             var taskExpectedTime=tvExpectedTimeTask.text.toString()
+            var expectedNum = taskExpectedTime.toLong()* 1000 * 60
 
 
            if(taskName.isNotEmpty() && taskDescription.isNotEmpty() && taskExpectedTime.isNotEmpty() ) {
-               tasksViewModel.saveTask("", taskName, taskDescription, taskExpectedTime, "")
+               tasksViewModel.saveTask("", taskName, taskDescription, taskExpectedTime, expectedNum.toString())
            }
             else{
                Toast.makeText(this, "You Should Complete All Information", Toast.LENGTH_SHORT).show()

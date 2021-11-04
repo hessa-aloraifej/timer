@@ -1,24 +1,36 @@
 package com.example.timer.adapters
 
+import android.content.Intent
 import android.os.CountDownTimer
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
+import androidx.core.content.ContextCompat.startActivity
 import androidx.core.view.isVisible
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 import com.example.timer.R
+import com.example.timer.TasksModelView
+import com.example.timer.TimerDetailsActivity
 import com.example.timer.data.Task
 import kotlinx.android.synthetic.main.item_row.view.*
+
 
 class TasksAdapter(private var tasksList: List<Task>) :
     RecyclerView.Adapter<TasksAdapter.ItemViewHolder>() {
 
-    var start = 600000L
-    var timeRun: Boolean = false
-    lateinit var countDownTimer: CountDownTimer
-
-    class ItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
+    // set this class to take position of one item
+    inner class ItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
+        init {
+            itemView.setOnClickListener{ v: View ->
+                val position : Int = adapterPosition
+                Toast.makeText(itemView.context, "this Task # $position selected" , Toast.LENGTH_SHORT).show()
+                kotlin.io.println("this Task # $position selected")
+            }
+        }
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
         return ItemViewHolder(
@@ -30,18 +42,25 @@ class TasksAdapter(private var tasksList: List<Task>) :
         )
     }
 
+
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
         val data = tasksList[position]
         holder.itemView.apply {
             tv_taskTitle.text = "${data.task}"
             tv_taskDescription.text = "${data.description}"
             ll_item_row.setOnClickListener {
+                // make change to tv timer
                 tv.isVisible = true
-                timeRun = !timeRun
-                println(timeRun)
-                startStop(tv)
-            }
 
+
+                var intent =  Intent(holder.itemView.context, TimerDetailsActivity::class.java)
+                intent.putExtra("noteTitle",data.task )
+                intent.putExtra("noteDescription",data.description )
+                intent.putExtra("expextedTime",data.expextedTime)
+                intent.putExtra("spentTime",data.spentTime)
+                intent.putExtra("id",data.id)
+                holder.itemView.context.startActivity(intent)
+            }
         }
     }
 
@@ -50,44 +69,5 @@ class TasksAdapter(private var tasksList: List<Task>) :
     fun setData(tasks: List<Task>){
         this.tasksList = tasks
         notifyDataSetChanged()
-    }
-
-    private fun startStop(tv: TextView) {
-        startTimer(tv)
-    }
-
-    private fun startTimer(tv: TextView) {
-        countDownTimer = object : CountDownTimer(start, 1000) {
-
-            override fun onFinish() {
-
-            }
-
-            //
-            override fun onTick(millisUntilFinished: Long) {
-                start = millisUntilFinished
-                updateTimer(tv)
-            }
-
-        }.start()
-        timeRun = true
-    }
-
-    fun stopTimer() {
-        countDownTimer.cancel()
-        timeRun = false
-    }
-
-    fun updateTimer(tv: TextView) {
-        var min = start / 60000
-        val sec = start % 60000 / 1000
-
-        if (sec < 10) {
-            tv.text = "$min :0$sec"
-        } else {
-            tv.text = "$min :$sec"
-        }
-
-
     }
 }

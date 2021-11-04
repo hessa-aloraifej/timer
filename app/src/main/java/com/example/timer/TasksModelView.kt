@@ -29,7 +29,7 @@ class TasksModelView (application: Application): AndroidViewModel(application) {
             "taskId" to taskId,
             "taskText" to task,
             "descriptionText" to description,
-            " expectedTime"  to expectedTime,
+            "expectedTime"  to expectedTime,
             "spentTime" to spentTime,
 
 
@@ -52,6 +52,8 @@ class TasksModelView (application: Application): AndroidViewModel(application) {
             .addOnSuccessListener { result ->
                 var task_name =""
                 var description= ""
+                var expectedTime= ""
+                var spentTime= ""
                 var tasks: ArrayList<Task> = arrayListOf()
                 for (document in result) {
 
@@ -60,9 +62,12 @@ class TasksModelView (application: Application): AndroidViewModel(application) {
                         ->   when (key) {
                         "taskText" -> task_name = value as String
                         "descriptionText" -> description = value as String
+                        "expectedTime" -> expectedTime = value as String
+                        "spentTime" -> spentTime = value as String
                         }
+                        Log.i("Spend time value : ","$spentTime")
                     }
-                  tasks.add(Task(document.id,task_name,description,"",""))
+                  tasks.add(Task(document.id,task_name,description,expectedTime,spentTime))
                 }
                 list.postValue(tasks)
 
@@ -75,6 +80,24 @@ class TasksModelView (application: Application): AndroidViewModel(application) {
 
 
             }
+
+    fun updateTimer(taskId: String, spentTimer: String){
+
+        db.collection("Task")
+            .get()
+            .addOnSuccessListener { result ->
+                for (document in result) {
+
+                    if(document.id == taskId){
+                        db.collection("Task").document(taskId).update("spentTime", spentTimer)
+                    }
+                }
+                getTask()
+            }
+            .addOnFailureListener { exception ->
+                Log.w("MainActivity", "Error getting documents.", exception)
+            }
+    }
 
     }
 
