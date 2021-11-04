@@ -1,21 +1,19 @@
 package com.example.timer
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.timer.adapters.TasksAdapter
-import kotlinx.android.synthetic.main.add_task_alert.*
 
 class ListTaskActivity : AppCompatActivity() {
-    private  val tasksViewModel by lazy { ViewModelProvider(this).get(TasksModelView::class.java) }
+    private val tasksViewModel by lazy { ViewModelProvider(this).get(TasksModelView::class.java) }
 
     lateinit var recyclerView: RecyclerView
+    lateinit var tasksAdapter: TasksAdapter
     lateinit var addTaskButton: ImageButton
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -24,24 +22,21 @@ class ListTaskActivity : AppCompatActivity() {
 
 
         recyclerView = findViewById(R.id.rv_tasks)
+        tasksAdapter = TasksAdapter()
+        recyclerView.adapter = tasksAdapter
+        recyclerView.layoutManager = LinearLayoutManager(this)
+
         addTaskButton = findViewById(R.id.btn_addTask)
 
-        tasksViewModel.getTask()
-        tasksViewModel.getNotes().observe(this, {
-                list ->  recyclerView.adapter = TasksAdapter(list)
-            recyclerView.layoutManager = LinearLayoutManager(this)
+        tasksViewModel.getTasks()
+        tasksViewModel.getTasksList().observe(this, { list ->
+            tasksAdapter.setData(list)
         })
 
         addTaskButton.setOnClickListener {
             addTaskAlert()
-
-
-         //   val intent= Intent(this,AddTaskActivity::class.java)
-            //            startActivity(intent)
         }
     }
-
-
 
 
     fun addTaskAlert() {
@@ -57,8 +52,8 @@ class ListTaskActivity : AppCompatActivity() {
         val taskNameAlert = view.findViewById<EditText>(R.id.edt_taskNameAlert)
         val taskDescriptionAlert = view.findViewById<EditText>(R.id.edt_taskDescriptionAlert)
         //val taskExpectedTimeAlert = view.findViewById<EditText>(R.id.edt_taskExpectedTimeAlert)
-        val seekBarTimer=view.findViewById<SeekBar>(R.id.seekBarTimer)
-        val tvExpectedTimeTask=view.findViewById<TextView>(R.id.tvExpectedTimeTask)
+        val seekBarTimer = view.findViewById<SeekBar>(R.id.seekBarTimer)
+        val tvExpectedTimeTask = view.findViewById<TextView>(R.id.tvExpectedTimeTask)
 
         val addBtnAlert = view.findViewById<Button>(R.id.btn_addAlert)
 
@@ -68,9 +63,9 @@ class ListTaskActivity : AppCompatActivity() {
 
         alertDialog.show()
 
-        seekBarTimer.setOnSeekBarChangeListener(object: SeekBar.OnSeekBarChangeListener{
+        seekBarTimer.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
-                tvExpectedTimeTask.text=progress.toString()
+                tvExpectedTimeTask.text = progress.toString()
             }
 
             override fun onStartTrackingTouch(seekBar: SeekBar?) {
@@ -83,18 +78,24 @@ class ListTaskActivity : AppCompatActivity() {
 
         })
         addBtnAlert.setOnClickListener {
-            var taskName=taskNameAlert.text.toString()
-            var taskDescription=taskDescriptionAlert.text.toString()
-           // var taskExpectedTime=taskExpectedTimeAlert.text.toString()
-            var taskExpectedTime=tvExpectedTimeTask.text.toString()
-            var expectedNum = taskExpectedTime.toLong()* 1000 * 60
+            var taskName = taskNameAlert.text.toString()
+            var taskDescription = taskDescriptionAlert.text.toString()
+            // var taskExpectedTime=taskExpectedTimeAlert.text.toString()
+            var taskExpectedTime = tvExpectedTimeTask.text.toString()
+            var expectedNum = taskExpectedTime.toLong() * 1000 * 60
 
 
-           if(taskName.isNotEmpty() && taskDescription.isNotEmpty() && taskExpectedTime.isNotEmpty() ) {
-               tasksViewModel.saveTask("", taskName, taskDescription, taskExpectedTime, expectedNum.toString())
-           }
-            else{
-               Toast.makeText(this, "You Should Complete All Information", Toast.LENGTH_SHORT).show()
+            if (taskName.isNotEmpty() && taskDescription.isNotEmpty() && taskExpectedTime.isNotEmpty()) {
+                tasksViewModel.saveTask(
+                    "",
+                    taskName,
+                    taskDescription,
+                    taskExpectedTime,
+                    expectedNum.toString()
+                )
+            } else {
+                Toast.makeText(this, "You Should Complete All Information", Toast.LENGTH_SHORT)
+                    .show()
             }
 
 
@@ -104,6 +105,12 @@ class ListTaskActivity : AppCompatActivity() {
 
     }
 
+    override fun onResume() {
+        super.onResume()
+        tasksViewModel.getTasksList().observe(this, { list ->
+            tasksAdapter.setData(list)
+        })
+    }
 
 
 }

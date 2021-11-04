@@ -18,9 +18,9 @@ import com.example.timer.data.Task
 import kotlinx.android.synthetic.main.item_row.view.*
 
 
-class TasksAdapter(private var tasksList: List<Task>) :
+class TasksAdapter() :
     RecyclerView.Adapter<TasksAdapter.ItemViewHolder>() {
-
+    private var tasksList: List<Task> = listOf()
     // set this class to take position of one item
     inner class ItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
         init {

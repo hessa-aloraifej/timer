@@ -8,98 +8,96 @@ import com.example.timer.data.Task
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
-class TasksModelView (application: Application): AndroidViewModel(application) {
-    var TAG: String = "IAmMainActivity"
-    var db = Firebase.firestore
-    val list: MutableLiveData<List<Task>> = MutableLiveData()
-   // val tasks: ArrayList<Task> = arrayListOf()
+class TasksModelView(application: Application) : AndroidViewModel(application) {
 
+    private val TAG: String = "TasksViewModel"
+    private var db = Firebase.firestore
+    private val tasksList: MutableLiveData<List<Task>> = MutableLiveData()
 
-
-
-
-    fun getNotes(): MutableLiveData<List<Task>> {
-        return list
+    fun getTasksList(): MutableLiveData<List<Task>> {
+        return tasksList
     }
 
-    fun saveTask(taskId:String,task: String, description:String,expectedTime:String,spentTime:String) {
-
+    fun saveTask(
+        taskId: String,
+        task: String,
+        description: String,
+        expectedTime: String,
+        spentTime: String
+    ) {
 
         val task = hashMapOf(
             "taskId" to taskId,
             "taskText" to task,
             "descriptionText" to description,
-            "expectedTime"  to expectedTime,
+            "expectedTime" to expectedTime,
             "spentTime" to spentTime,
-
-
-            )
+        )
 
         db.collection("Task").add(task)
-            .addOnSuccessListener { Log.w("MainActivity", "Saving Data Successfully.")
-       getTask()
+            .addOnSuccessListener {
+                Log.w(TAG, "Saving Data Successfully.")
+                getTasks()
             }
             .addOnFailureListener { exception ->
                 Log.w(TAG, "Error Saving Data.", exception)
             }
-
-
     }
-    fun getTask(){
+
+    fun getTasks() {
 
         db.collection("Task")
             .get()
             .addOnSuccessListener { result ->
-                var task_name =""
-                var description= ""
-                var expectedTime= ""
-                var spentTime= ""
-                var tasks: ArrayList<Task> = arrayListOf()
-                for (document in result) {
 
+                var tasks: ArrayList<Task> = arrayListOf()
+
+                var taskText = ""
+                var descriptionText = ""
+                var expectedTime = ""
+                var spentTime = ""
+
+                for (document in result) {
                     Log.d(TAG, "${document.id} => ${document.data}")
                     document.data.map { (key, value)
-                        ->   when (key) {
-                        "taskText" -> task_name = value as String
-                        "descriptionText" -> description = value as String
-                        "expectedTime" -> expectedTime = value as String
-                        "spentTime" -> spentTime = value as String
+                        ->
+                        when (key) {
+                            "taskText" -> taskText = value as String
+                            "descriptionText" -> descriptionText = value as String
+                            "expectedTime" -> expectedTime = value as String
+                            "spentTime" -> spentTime = value as String
                         }
-                        Log.i("Spend time value : ","$spentTime")
                     }
-                  tasks.add(Task(document.id,task_name,description,expectedTime,spentTime))
+                    tasks.add(Task(document.id, taskText, descriptionText, expectedTime, spentTime))
                 }
-                list.postValue(tasks)
-
-
+                tasksList.postValue(tasks)
             }
             .addOnFailureListener { exception ->
                 Log.w(TAG, "Error getting documents.", exception)
             }
 
 
+    }
 
-            }
-
-    fun updateTimer(taskId: String, spentTimer: String){
+    fun updateTimer(taskId: String, spentTimer: String) {
 
         db.collection("Task")
             .get()
             .addOnSuccessListener { result ->
                 for (document in result) {
-
-                    if(document.id == taskId){
+                    if (document.id == taskId) {
                         db.collection("Task").document(taskId).update("spentTime", spentTimer)
+                        Log.w(TAG, "Updated Spent Timer Successfully.")
                     }
                 }
-                getTask()
+                getTasks()
             }
             .addOnFailureListener { exception ->
-                Log.w("MainActivity", "Error getting documents.", exception)
+                Log.w(TAG, "Error getting documents.", exception)
             }
     }
 
-    }
+}
 
 
 
