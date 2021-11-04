@@ -11,7 +11,6 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
-
         android:text="Skip"
         android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
@@ -20,8 +19,9 @@
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
-        android:layout_height="350dp"
+        android:layout_height="match_parent"
         android:orientation="vertical"
+        android:gravity="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -30,37 +30,30 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="title"
+            android:paddingHorizontal="10dp"
+            android:text="Track Your Progress"
             android:textColor="@color/white"
             android:textSize="28sp"
             android:textStyle="bold" />
 
-        <View
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:layout_weight="1" />
-
         <ImageView
             android:id="@+id/iv_pagerRecycler_image"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:src="@drawable/icon_add" />
-
-        <View
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:layout_weight="1" />
+            android:paddingHorizontal="20dp"
+            android:src="@drawable/slide3" />
 
         <TextView
             android:id="@+id/tv_pagerRecycler_describe"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="Hello World!"
+            android:paddingHorizontal="10dp"
+            android:text="Become goal-oriented by tracking your progress"
+            android:gravity="center"
             android:textColor="@color/white"
-            android:textSize="28sp"
-            android:textStyle="bold" />
+            android:textSize="24sp" />
 
 
     </LinearLayout>
@@ -69,15 +62,15 @@
         android:id="@+id/tv_pagerRecycler_start"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="start"
-        android:textSize="20sp"
-        android:textStyle="bold"
+        android:text="Start"
         android:textColor="@color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        android:layout_margin="20dp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/linearLayout"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
-        android:visibility="gone"/>
+        app:layout_constraintStart_toStartOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

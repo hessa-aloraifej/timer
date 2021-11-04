@@ -10,6 +10,9 @@ class HomeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
 
+        //hide the action bar
+        supportActionBar?.hide()
+
         btn_home_track.setOnClickListener{
             startActivity(Intent(this, TrackActivity::class.java))
         }
