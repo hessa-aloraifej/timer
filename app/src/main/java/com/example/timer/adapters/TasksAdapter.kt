@@ -59,6 +59,7 @@ class TasksAdapter() :
                 intent.putExtra("expextedTime",data.expextedTime)
                 intent.putExtra("spentTime",data.spentTime)
                 intent.putExtra("id",data.id)
+                intent.putExtra("state",data.state)
                 holder.itemView.context.startActivity(intent)
             }
         }

@@ -80,12 +80,11 @@ class ListTaskActivity : AppCompatActivity() {
         addBtnAlert.setOnClickListener {
             var taskName = taskNameAlert.text.toString()
             var taskDescription = taskDescriptionAlert.text.toString()
-            // var taskExpectedTime=taskExpectedTimeAlert.text.toString()
             var taskExpectedTime = tvExpectedTimeTask.text.toString()
             var expectedNum = taskExpectedTime.toLong() * 1000 * 60
 
 
-            if (taskName.isNotEmpty() && taskDescription.isNotEmpty() && taskExpectedTime.isNotEmpty()) {
+            if (taskName.isNotEmpty() && taskDescription.isNotEmpty() && taskExpectedTime.isNotEmpty() && taskExpectedTime.isNotEmpty()) {
                 tasksViewModel.saveTask(
                     "",
                     taskName,
@@ -105,12 +104,12 @@ class ListTaskActivity : AppCompatActivity() {
 
     }
 
-    override fun onResume() {
-        super.onResume()
-        tasksViewModel.getTasksList().observe(this, { list ->
-            tasksAdapter.setData(list)
-        })
-    }
+//    override fun onResume() {
+//        super.onResume()
+//        tasksViewModel.getTasksList().observe(this, { list ->
+//            tasksAdapter.setData(list)
+//        })
+//    }
 }
 
 

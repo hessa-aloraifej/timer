@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.util.Log
+import android.view.View
 import android.widget.Button
 import android.widget.TextView
 import androidx.core.view.isVisible
@@ -20,6 +21,7 @@ class TimerDetailsActivity : AppCompatActivity() {
     lateinit var tvExpectedTime : TextView
     lateinit var btnDone : Button
     var id = ""
+    var state = ""
     var start = 0L
     var timeRun: Boolean = false
     lateinit var countDownTimer: CountDownTimer
@@ -27,7 +29,7 @@ class TimerDetailsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_timer_details)
-        //initi
+        //init
         tvTitle = findViewById(R.id.tvTitle)
         tvDescription = findViewById(R.id.tvDescription)
         tvTimer = findViewById(R.id.tvTimer)
@@ -40,11 +42,15 @@ class TimerDetailsActivity : AppCompatActivity() {
         tvTimer.text = intent.getStringExtra("spentTime")
         tvExpectedTime.text = intent.getStringExtra("expextedTime")+":00"
 
+        state = intent.getStringExtra("state")!!
         start = intent.getStringExtra("spentTime")!!.toLong()
         Log.i("Start value :","$start")
         id = intent.getStringExtra("id")!!
 
 
+        if(state == "done"){
+            tvTimer.visibility = View.INVISIBLE
+        }
         btnDone.isVisible = false
         startStop(tvTimer)
         tvTimer.setOnClickListener{
@@ -80,7 +86,11 @@ class TimerDetailsActivity : AppCompatActivity() {
             override fun onFinish(){
                 timeRun = false
                 btnDone.isVisible = true
-                btnDone.setOnClickListener{btnDone.setBackgroundColor(Color.GREEN)}
+                btnDone.setOnClickListener{
+                    btnDone.setBackgroundColor(Color.GREEN)
+                    state = "done"
+                    tasksViewModel.updateState(id,state)
+                }
             }
         }.start()
         timeRun = true

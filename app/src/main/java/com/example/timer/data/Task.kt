@@ -5,4 +5,5 @@ class Task(
     val task:String,
     val description:String,
     val expextedTime: String,
-    val spentTime: String)
+    val spentTime: String,
+    val state: String)
