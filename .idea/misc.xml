@@ -34,6 +34,7 @@
         <entry key="app/src/main/res/layout/fragment_add.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_add_task.xml" value="0.165" />
         <entry key="app/src/main/res/layout/fragment_details.xml" value="0.375" />
+        <entry key="app/src/main/res/layout/fragment_edit_task.xml" value="0.24479166666666666" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_hoome.xml" value="0.11068895643363728" />
         <entry key="app/src/main/res/layout/fragment_list.xml" value="0.25" />

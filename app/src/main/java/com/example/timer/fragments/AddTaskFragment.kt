@@ -36,8 +36,6 @@ class AddTaskFragment : Fragment() {
                 .navigate(R.id.action_addTaskFragment_to_listFragment)
         }
 
-        taskNameAlert.hint = "Enter Task Name"
-        taskDescriptionAlert.hint = "Enter Task Description"
 
         seekBarTimer.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {

@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.google.firebase.firestore.FirebaseFirestore
+import kotlinx.coroutines.CoroutineScope
 
 class TasksRepository {
     private val TAG: String = "TaskRepository"
@@ -103,5 +104,32 @@ class TasksRepository {
                 Log.w(TAG, "Error getting documents.", exception)
             }
 
+    }
+
+    fun deleteTask(taskId: String) {
+        db.collection("Task").document(taskId).delete()
+            .addOnSuccessListener { result ->
+                Log.w(TAG, "Deleted Successfully!")
+            }
+            .addOnFailureListener { exception ->
+                Log.w(TAG, "Error getting documents.", exception)
+            }
+    }
+
+    fun updateTask(taskId: String, task: String, description: String) {
+        db.collection("Task").document(taskId).update("taskText", task)
+            .addOnSuccessListener { result ->
+                Log.w(TAG, "Title Updated Successfully!")
+            }
+            .addOnFailureListener { exception ->
+                Log.w(TAG, "Error getting documents.", exception)
+            }
+        db.collection("Task").document(taskId).update("descriptionText", description)
+            .addOnSuccessListener { result ->
+                Log.w(TAG, "Description Updated Successfully!")
+            }
+            .addOnFailureListener { exception ->
+                Log.w(TAG, "Error getting documents.", exception)
+            }
     }
 }

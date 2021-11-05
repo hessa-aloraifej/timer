@@ -24,6 +24,9 @@
         <action
             android:id="@+id/action_detailsFragment_to_listFragment"
             app:destination="@id/listFragment" />
+        <action
+            android:id="@+id/action_detailsFragment_to_editTaskFragment2"
+            app:destination="@id/editTaskFragment" />
     </fragment>
     <fragment
         android:id="@+id/addTaskFragment"
@@ -33,5 +36,14 @@
         <action
             android:id="@+id/action_addTaskFragment_to_listFragment"
             app:destination="@id/listFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/editTaskFragment"
+        android:name="com.example.timer.fragments.EditTaskFragment"
+        android:label="fragment_edit_task"
+        tools:layout="@layout/fragment_edit_task" >
+        <action
+            android:id="@+id/action_editTaskFragment_to_detailsFragment2"
+            app:destination="@id/detailsFragment" />
     </fragment>
 </navigation>

@@ -1,6 +1,6 @@
 package com.example.timer.fragments
 
-import android.graphics.Color
+import android.content.DialogInterface
 import android.os.Bundle
 import android.os.CountDownTimer
 import androidx.fragment.app.Fragment
@@ -8,7 +8,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
-import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import com.example.timer.R
@@ -94,12 +93,20 @@ class DetailsFragment : Fragment() {
             }
         }
 
+        deleteButton.setOnClickListener {
+            deleteConfirmationDialog()
+        }
+
         doneButton.setOnClickListener {
             tasksViewModel.updateState(id, "done")
             doneUI()
             if (timerRun) {
                 stopTimer()
             }
+        }
+
+        editButton.setOnClickListener {
+            editTask()
         }
 
         if (state == "done") {
@@ -197,8 +204,6 @@ class DetailsFragment : Fragment() {
         detailsFrameLayout.background = resources.getDrawable(R.drawable.bg_blue_purple_gradient)
         stateTextView.text = "In Progress"
         stateTextView.setTextColor(resources.getColor(R.color.purple_500))
-
-
     }
 
     private fun notStartedUI() {
@@ -209,5 +214,33 @@ class DetailsFragment : Fragment() {
         stateTextView.setTextColor(resources.getColor(R.color.red_500))
 
 
+    }
+
+    private fun deleteConfirmationDialog() {
+        val dialogBuilder = activity?.let { androidx.appcompat.app.AlertDialog.Builder(it) }
+
+        dialogBuilder?.setMessage("Are You Sure To Delete This Note?")
+            ?.setPositiveButton("Delete", DialogInterface.OnClickListener { _, _ ->
+                tasksViewModel.deleteTask(id)
+                Navigation.findNavController(fragmentView)
+                    .navigate(R.id.action_detailsFragment_to_listFragment)
+            })?.setNegativeButton("Cancel", DialogInterface.OnClickListener { dialog, _ -> dialog.cancel()
+            })
+        val alert = dialogBuilder?.create()
+        alert?.setTitle("Confirmation")
+        alert?.show()
+    }
+
+    private fun editTask(){
+        val bundle = Bundle()
+        bundle!!.putString("task.id", id)
+        bundle!!.putString("task.task", task)
+        bundle!!.putString("task.description", description)
+        bundle!!.putString("task.expectedTime", expectedTime)
+        bundle!!.putString("task.spentTime", spentTime)
+        bundle!!.putString("task.state", state)
+
+        Navigation.findNavController(fragmentView)
+            .navigate(R.id.action_detailsFragment_to_editTaskFragment2, bundle)
     }
 }
