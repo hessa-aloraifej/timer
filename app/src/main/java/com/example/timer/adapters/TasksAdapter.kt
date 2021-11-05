@@ -15,13 +15,12 @@ import kotlinx.android.synthetic.main.item_row.view.*
 class TasksAdapter(private val listFragment: ListFragment) :
     RecyclerView.Adapter<TasksAdapter.ItemViewHolder>() {
     private var tasksList: List<Task> = listOf()
+
     // set this class to take position of one item
-    inner class ItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
+    inner class ItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         init {
-            itemView.setOnClickListener{ v: View ->
-                val position : Int = adapterPosition
-                Toast.makeText(itemView.context, "this Task # $position selected" , Toast.LENGTH_SHORT).show()
-                kotlin.io.println("this Task # $position selected")
+            itemView.setOnClickListener { v: View ->
+                val position: Int = adapterPosition
             }
         }
     }
@@ -40,30 +39,39 @@ class TasksAdapter(private val listFragment: ListFragment) :
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
         val data = tasksList[position]
         holder.itemView.apply {
+
+            when (data.state) {
+                "done" -> {
+                    ll_item_row_colorBox.background =
+                        resources.getDrawable(R.drawable.bg_round_teal)
+                    img_colorBox.setImageResource(R.drawable.ic_round_done_24)
+                }
+                "started" -> {
+                    ll_item_row_colorBox.background =
+                        resources.getDrawable(R.drawable.bg_round_purple)
+                    img_colorBox.setImageResource(R.drawable.ic_round_pause_24)
+                }
+                "notStarted" -> {
+                    ll_item_row_colorBox.background = resources.getDrawable(R.drawable.bg_round_red)
+                    img_colorBox.setImageResource(R.drawable.ic_round_play_arrow_24)
+                }
+                else -> {
+                    ll_item_row_colorBox.background =
+                        resources.getDrawable(R.drawable.bg_round_teal)
+                }
+            }
+
             tv_taskTitle.text = "${data.task}"
             tv_taskDescription.text = "${data.description}"
             ll_item_row.setOnClickListener {
-
-                // make change to tv timer
-                tv.isVisible = true
-
                 listFragment.viewDetails(data)
-
-//                var intent =  Intent(holder.itemView.context, TimerDetailsActivity::class.java)
-//                intent.putExtra("noteTitle",data.task )
-//                intent.putExtra("noteDescription",data.description )
-//                intent.putExtra("expextedTime",data.expectedTime)
-//                intent.putExtra("spentTime",data.spentTime)
-//                intent.putExtra("id",data.id)
-//                intent.putExtra("state",data.state)
-//                holder.itemView.context.startActivity(intent)
             }
         }
     }
 
     override fun getItemCount(): Int = tasksList.size
 
-    fun setData(tasks: List<Task>){
+    fun setData(tasks: List<Task>) {
         this.tasksList = tasks
         notifyDataSetChanged()
     }

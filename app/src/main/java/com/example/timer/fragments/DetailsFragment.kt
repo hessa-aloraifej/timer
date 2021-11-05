@@ -28,6 +28,9 @@ class DetailsFragment : Fragment() {
     lateinit var timerLayout: LinearLayout
     lateinit var playImageButton: ImageButton
     lateinit var backButton: ImageButton
+    lateinit var deleteButton: ImageButton
+    lateinit var editButton: ImageButton
+    lateinit var stateTextView: TextView
 
     lateinit var countDownTimer: CountDownTimer
     var timerStartTime = 0L
@@ -57,7 +60,10 @@ class DetailsFragment : Fragment() {
         doneButton = fragmentView.findViewById(R.id.btnDone)
         timerLayout = fragmentView.findViewById(R.id.ll_timeCircle)
         playImageButton = fragmentView.findViewById(R.id.imgBtn_playStop)
+        deleteButton = fragmentView.findViewById(R.id.imgBtn_delete_details)
+        editButton = fragmentView.findViewById(R.id.imgBtn_edit_details)
         backButton = fragmentView.findViewById(R.id.backBtn_detailsFragment)
+        stateTextView = fragmentView.findViewById(R.id.tv_taskState_details)
 
         //get data from previous fragment
         id = requireArguments().getString("task.id").toString()
@@ -72,15 +78,14 @@ class DetailsFragment : Fragment() {
                 .navigate(R.id.action_detailsFragment_to_listFragment)
         }
         //set values in views
-        titleTextView.text = "Task: $task"
-        descriptionTextView.text = "Description: $description"
+        titleTextView.text = "$task"
+        descriptionTextView.text = "$description"
         spentTimeTextView.text = spentTime
         expectedTimeTextView.text = "$expectedTime:00"
 
         //set timer start time
         timerStartTime = spentTime.toLong()
         updateTimer(spentTimeTextView)
-
 
         //start timer button
         timerLayout.setOnClickListener {
@@ -89,33 +94,23 @@ class DetailsFragment : Fragment() {
             }
         }
 
-        doneButton.setOnClickListener{
-            doneButton.visibility = View.INVISIBLE
+        doneButton.setOnClickListener {
             tasksViewModel.updateState(id, "done")
-            playImageButton.isVisible = false
-            timerLayout.background = resources.getDrawable(R.drawable.bg_circle_teal)
-            detailsFrameLayout.background = resources.getDrawable(R.drawable.bg_blue_teal_gradient)
-            doneButton.isVisible = false
+            doneUI()
+            if (timerRun) {
+                stopTimer()
+            }
         }
 
         if (state == "done") {
-            playImageButton.isVisible = false
-            doneButton.isVisible = false
-            timerLayout.background = resources.getDrawable(R.drawable.bg_circle_teal)
-            detailsFrameLayout.background = resources.getDrawable(R.drawable.bg_blue_teal_gradient)
-
+            doneUI()
         }
 
         if (state == "started") {
-            doneButton.isVisible = true
-            timerLayout.background = resources.getDrawable(R.drawable.bg_circle_purple)
-            detailsFrameLayout.background = resources.getDrawable(R.drawable.bg_blue_purple_gradient)
+            startedUI()
         }
         if (state == "notStarted") {
-            doneButton.isVisible = false
-            timerLayout.background = resources.getDrawable(R.drawable.bg_circle_red)
-            detailsFrameLayout.background = resources.getDrawable(R.drawable.bg_blue_red_gradient)
-
+            notStartedUI()
         }
 
         return fragmentView
@@ -130,7 +125,10 @@ class DetailsFragment : Fragment() {
     }
 
     private fun startTimer(tv: TextView) {
-        tasksViewModel.updateState(id, "started")
+        if (state == "notStarted") {
+            tasksViewModel.updateState(id, "started")
+            doneButton.visibility = View.VISIBLE
+        }
         timerLayout.background = resources.getDrawable(R.drawable.bg_circle_teal)
         playImageButton.setImageResource(R.drawable.ic_round_pause_24)
         countDownTimer = object : CountDownTimer(timerStartTime, 1000) {
@@ -153,12 +151,6 @@ class DetailsFragment : Fragment() {
         tasksViewModel.updateTimer(id, timerStartTime.toString())
         countDownTimer?.cancel()
         timerRun = false
-        doneButton.isVisible = true
-        doneButton.setOnClickListener {
-            doneButton.setBackgroundColor(Color.GREEN)
-            state = "done"
-            tasksViewModel.updateState(id, state)
-        }
     }
 
     fun updateTimer(tv: TextView) {
@@ -186,5 +178,36 @@ class DetailsFragment : Fragment() {
     override fun onPause() {
         super.onPause()
         tasksViewModel.updateTimer(id, timerStartTime.toString())
+    }
+
+    private fun doneUI() {
+        playImageButton.visibility = View.INVISIBLE
+        doneButton.visibility = View.INVISIBLE
+        timerLayout.background = resources.getDrawable(R.drawable.bg_circle_teal)
+        detailsFrameLayout.background = resources.getDrawable(R.drawable.bg_blue_teal_gradient)
+        stateTextView.text = "Done"
+        stateTextView.setTextColor(resources.getColor(R.color.teal_500))
+        editButton.visibility = View.GONE
+
+    }
+
+    private fun startedUI() {
+        doneButton.visibility = View.VISIBLE
+        timerLayout.background = resources.getDrawable(R.drawable.bg_circle_purple)
+        detailsFrameLayout.background = resources.getDrawable(R.drawable.bg_blue_purple_gradient)
+        stateTextView.text = "In Progress"
+        stateTextView.setTextColor(resources.getColor(R.color.purple_500))
+
+
+    }
+
+    private fun notStartedUI() {
+        doneButton.visibility = View.INVISIBLE
+        timerLayout.background = resources.getDrawable(R.drawable.bg_circle_red)
+        detailsFrameLayout.background = resources.getDrawable(R.drawable.bg_blue_red_gradient)
+        stateTextView.text = "Not Started"
+        stateTextView.setTextColor(resources.getColor(R.color.red_500))
+
+
     }
 }

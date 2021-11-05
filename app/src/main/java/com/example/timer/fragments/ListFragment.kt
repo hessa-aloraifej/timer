@@ -23,6 +23,7 @@ class ListFragment : Fragment() {
     lateinit var tasksAdapter: TasksAdapter
     lateinit var addTaskButton: ImageButton
     lateinit var backButton: ImageButton
+    lateinit var progressBar: ProgressBar
 
 
     override fun onCreateView(
@@ -36,15 +37,18 @@ class ListFragment : Fragment() {
         recyclerView.adapter = tasksAdapter
         recyclerView.layoutManager = LinearLayoutManager(activity)
 
+        progressBar = fragmentView.findViewById(R.id.progressBar)
         addTaskButton = fragmentView.findViewById(R.id.btn_addTask)
         backButton = fragmentView.findViewById(R.id.backBtn_listFragment)
         tasksViewModel.getAllTasks()
+
         tasksViewModel.getTasksList.observe(viewLifecycleOwner, { list ->
             tasksAdapter.setData(list)
+            progressBar.visibility = View.GONE
         })
 
         backButton.setOnClickListener{
-            activity?.onBackPressed()
+            activity?.finish()
         }
         addTaskButton.setOnClickListener {
             addTask()

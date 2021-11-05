@@ -11,9 +11,11 @@
         <entry key="app/src/main/res/drawable/bg_circle.xml" value="0.14010416666666667" />
         <entry key="app/src/main/res/drawable/bg_circle_purple.xml" value="0.2609375" />
         <entry key="app/src/main/res/drawable/bg_round_purple.xml" value="0.2609375" />
+        <entry key="app/src/main/res/drawable/bg_round_red.xml" value="0.2609375" />
         <entry key="app/src/main/res/drawable/bg_round_teal.xml" value="0.2609375" />
         <entry key="app/src/main/res/drawable/bg_rounded.xml" value="0.2609375" />
         <entry key="app/src/main/res/drawable/bg_rounded_teal.xml" value="0.2609375" />
+        <entry key="app/src/main/res/drawable/bg_rounded_transparent.xml" value="0.2609375" />
         <entry key="app/src/main/res/drawable/border_shadow.xml" value="0.2609375" />
         <entry key="app/src/main/res/drawable/custom_thumb.xml" value="0.2609375" />
         <entry key="app/src/main/res/drawable/edt_rounded.xml" value="0.2609375" />
@@ -31,10 +33,10 @@
         <entry key="app/src/main/res/layout/column_item.xml" value="0.24479166666666666" />
         <entry key="app/src/main/res/layout/fragment_add.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_add_task.xml" value="0.165" />
-        <entry key="app/src/main/res/layout/fragment_details.xml" value="0.165" />
+        <entry key="app/src/main/res/layout/fragment_details.xml" value="0.375" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_hoome.xml" value="0.11068895643363728" />
-        <entry key="app/src/main/res/layout/fragment_list.xml" value="0.165" />
+        <entry key="app/src/main/res/layout/fragment_list.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_view_task.xml" value="0.19635416666666666" />
         <entry key="app/src/main/res/layout/item_row.xml" value="0.45" />
       </map>

@@ -2,9 +2,9 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/fl_details"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/fl_details"
     android:background="@drawable/bg_blue_purple_gradient"
     tools:context=".fragments.DetailsFragment">
 
@@ -41,6 +41,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/ll_details"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="15dp"
@@ -75,11 +76,11 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginVertical="6dp"
                 android:background="@drawable/bg_rounded"
                 android:backgroundTint="#F6EBFF"
                 android:gravity="center"
                 android:orientation="horizontal"
-                android:layout_marginVertical="6dp"
                 android:paddingHorizontal="10dp">
 
                 <TextView
@@ -95,40 +96,42 @@
             </LinearLayout>
 
 
-        <LinearLayout
-            android:id="@+id/ll_timeCircle"
-            android:layout_marginVertical="20dp"
-            android:layout_gravity="center"
-            android:layout_width="200dp"
-            android:layout_height="200dp"
-            android:background="@drawable/bg_circle_red"
-            android:gravity="center"
-            android:orientation="vertical">
-            <TextView
-                android:id="@+id/tv_expectedTime_details"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="10:00"
-                android:textAlignment="center"
-                android:textSize="20dp"
-                android:textColor="@color/white" />
-            <TextView
-                android:id="@+id/tv_spentTimer_details"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="00:30"
-                android:textSize="50dp"
-                android:textStyle="bold"
-                android:textAlignment="center"
-                android:textColor="@color/white" />
+            <LinearLayout
+                android:id="@+id/ll_timeCircle"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:layout_gravity="center"
+                android:layout_marginVertical="20dp"
+                android:background="@drawable/bg_circle_red"
+                android:gravity="center"
+                android:orientation="vertical">
 
-            <ImageButton
-                android:id="@+id/imgBtn_playStop"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@android:color/transparent"
-                android:src="@drawable/ic_round_play_arrow_24"/>
-        </LinearLayout>
+                <TextView
+                    android:id="@+id/tv_expectedTime_details"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="10:00"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:textSize="20dp" />
+
+                <TextView
+                    android:id="@+id/tv_spentTimer_details"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="00:30"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:textSize="50dp"
+                    android:textStyle="bold" />
+
+                <ImageButton
+                    android:id="@+id/imgBtn_playStop"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    android:src="@drawable/ic_round_play_arrow_24" />
+            </LinearLayout>
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btnDone"
@@ -138,9 +141,52 @@
                 android:background="@drawable/bg_rounded"
                 android:backgroundTint="@color/blue_500"
                 android:text="Finish Task!"
-                android:textSize="18dp"
                 android:textAllCaps="false"
-                android:textColor="@color/white" />
+                android:textColor="@color/white"
+                android:textSize="18dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:orientation="horizontal"
+            android:gravity="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ll_details">
+
+
+            <TextView
+                android:id="@+id/tv_taskState_details"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_rounded"
+                android:paddingHorizontal="10dp"
+                android:text="Done"
+                android:layout_marginStart="5dp"
+                android:textColor="@color/blue_500"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+
+            <ImageButton
+                android:id="@+id/imgBtn_delete_details"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:src="@drawable/ic_round_delete_24" />
+
+            <ImageButton
+                android:id="@+id/imgBtn_edit_details"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:src="@drawable/ic_round_edit_24" />
         </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
