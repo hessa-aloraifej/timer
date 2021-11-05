@@ -45,7 +45,7 @@ class TasksModelView(application: Application) : AndroidViewModel(application) {
 
     fun updateState(taskId: String, state: String){
         viewModelScope.launch(Dispatchers.IO) {
-            repository.updateTimer(taskId,state)
+            repository.updateState(taskId,state)
         }
     }
 

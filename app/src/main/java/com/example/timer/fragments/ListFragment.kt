@@ -50,8 +50,6 @@ class ListFragment : Fragment() {
             addTask()
         }
 
-
-
         return fragmentView
     }
 

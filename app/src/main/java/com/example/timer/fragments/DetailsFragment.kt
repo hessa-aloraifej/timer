@@ -7,27 +7,31 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.TextView
+import android.widget.*
 import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.Navigation
 import com.example.timer.R
 import com.example.timer.viewmodel.TasksModelView
 
 class DetailsFragment : Fragment() {
 
-    private  val tasksViewModel by lazy { ViewModelProvider(this).get(TasksModelView::class.java) }
+    private val tasksViewModel by lazy { ViewModelProvider(this).get(TasksModelView::class.java) }
     lateinit var fragmentView: View
 
-    lateinit var tvTitle : TextView
-    lateinit var tvDescription : TextView
-    lateinit var tvTimer : TextView
-    lateinit var tvExpectedTime : TextView
-    lateinit var btnDone : Button
+    lateinit var detailsFrameLayout: FrameLayout
+    lateinit var titleTextView: TextView
+    lateinit var descriptionTextView: TextView
+    lateinit var spentTimeTextView: TextView
+    lateinit var expectedTimeTextView: TextView
+    lateinit var doneButton: Button
+    lateinit var timerLayout: LinearLayout
+    lateinit var playImageButton: ImageButton
+    lateinit var backButton: ImageButton
 
     lateinit var countDownTimer: CountDownTimer
-    var start = 0L
-    var timeRun: Boolean = false
+    var timerStartTime = 0L
+    var timerRun: Boolean = false
 
     var id = ""
     var task = ""
@@ -45,11 +49,15 @@ class DetailsFragment : Fragment() {
         fragmentView = inflater.inflate(R.layout.fragment_details, container, false)
 
         //init views
-        tvTitle = fragmentView.findViewById(R.id.tvTitle)
-        tvDescription = fragmentView.findViewById(R.id.tvDescription)
-        tvTimer = fragmentView.findViewById(R.id.tvTimer)
-        tvExpectedTime = fragmentView.findViewById(R.id.tvExpectedTime)
-        btnDone = fragmentView.findViewById(R.id.btnDone)
+        detailsFrameLayout = fragmentView.findViewById(R.id.fl_details)
+        titleTextView = fragmentView.findViewById(R.id.tv_taskTitle_details)
+        descriptionTextView = fragmentView.findViewById(R.id.tv_taskDesc_details)
+        spentTimeTextView = fragmentView.findViewById(R.id.tv_spentTimer_details)
+        expectedTimeTextView = fragmentView.findViewById(R.id.tv_expectedTime_details)
+        doneButton = fragmentView.findViewById(R.id.btnDone)
+        timerLayout = fragmentView.findViewById(R.id.ll_timeCircle)
+        playImageButton = fragmentView.findViewById(R.id.imgBtn_playStop)
+        backButton = fragmentView.findViewById(R.id.backBtn_detailsFragment)
 
         //get data from previous fragment
         id = requireArguments().getString("task.id").toString()
@@ -59,69 +67,103 @@ class DetailsFragment : Fragment() {
         spentTime = requireArguments().getString("task.spentTime").toString()
         state = requireArguments().getString("task.state").toString()
 
+        backButton.setOnClickListener {
+            Navigation.findNavController(fragmentView)
+                .navigate(R.id.action_detailsFragment_to_listFragment)
+        }
         //set values in views
-        tvTitle.text = "Task: $task"
-        tvDescription.text = "Description: $description"
-        tvTimer.text = spentTime
-        tvExpectedTime.text = "$expectedTime:00"
+        titleTextView.text = "Task: $task"
+        descriptionTextView.text = "Description: $description"
+        spentTimeTextView.text = spentTime
+        expectedTimeTextView.text = "$expectedTime:00"
 
         //set timer start time
-        start = spentTime.toLong()
+        timerStartTime = spentTime.toLong()
+        updateTimer(spentTimeTextView)
 
-        //start timer once activity start
-        startStop(tvTimer)
 
-        if(state == "done"){
-            tvTimer.visibility = View.INVISIBLE
+        //start timer button
+        timerLayout.setOnClickListener {
+            if (state != "done") {
+                startStop(spentTimeTextView)
+            }
         }
 
-        btnDone.isVisible = false
+        doneButton.setOnClickListener{
+            doneButton.visibility = View.INVISIBLE
+            tasksViewModel.updateState(id, "done")
+            playImageButton.isVisible = false
+            timerLayout.background = resources.getDrawable(R.drawable.bg_circle_teal)
+            detailsFrameLayout.background = resources.getDrawable(R.drawable.bg_blue_teal_gradient)
+            doneButton.isVisible = false
+        }
 
-        tvTimer.setOnClickListener{
-            startStop(tvTimer)
+        if (state == "done") {
+            playImageButton.isVisible = false
+            doneButton.isVisible = false
+            timerLayout.background = resources.getDrawable(R.drawable.bg_circle_teal)
+            detailsFrameLayout.background = resources.getDrawable(R.drawable.bg_blue_teal_gradient)
+
+        }
+
+        if (state == "started") {
+            doneButton.isVisible = true
+            timerLayout.background = resources.getDrawable(R.drawable.bg_circle_purple)
+            detailsFrameLayout.background = resources.getDrawable(R.drawable.bg_blue_purple_gradient)
+        }
+        if (state == "notStarted") {
+            doneButton.isVisible = false
+            timerLayout.background = resources.getDrawable(R.drawable.bg_circle_red)
+            detailsFrameLayout.background = resources.getDrawable(R.drawable.bg_blue_red_gradient)
+
         }
 
         return fragmentView
     }
 
-    fun startStop(tv: TextView) {
-        if(timeRun) {
+    private fun startStop(tv: TextView) {
+        if (timerRun) {
             stopTimer()
-        }else{
+        } else {
             startTimer(tv)
         }
     }
 
     private fun startTimer(tv: TextView) {
-        countDownTimer = object : CountDownTimer(start, 1000) {
+        tasksViewModel.updateState(id, "started")
+        timerLayout.background = resources.getDrawable(R.drawable.bg_circle_teal)
+        playImageButton.setImageResource(R.drawable.ic_round_pause_24)
+        countDownTimer = object : CountDownTimer(timerStartTime, 1000) {
             override fun onTick(millisUntilFinished: Long) {
-                start = millisUntilFinished
-                updatTimer(tv)
+                timerStartTime = millisUntilFinished
+                updateTimer(tv)
             }
-            override fun onFinish(){
-                timeRun = false
-                btnDone.isVisible = true
-                btnDone.setOnClickListener{
-                    btnDone.setBackgroundColor(Color.GREEN)
-                }
+
+            override fun onFinish() {
+                timerRun = false
+
             }
         }.start()
-        timeRun = true
+        timerRun = true
     }
 
-    fun stopTimer() {
+    private fun stopTimer() {
+        timerLayout.background = resources.getDrawable(R.drawable.bg_circle_purple)
+        playImageButton.setImageResource(R.drawable.ic_round_play_arrow_24)
+        tasksViewModel.updateTimer(id, timerStartTime.toString())
         countDownTimer?.cancel()
-        timeRun = false
-        btnDone.isVisible = true
-        btnDone.setOnClickListener{btnDone.setBackgroundColor(Color.GREEN)
+        timerRun = false
+        doneButton.isVisible = true
+        doneButton.setOnClickListener {
+            doneButton.setBackgroundColor(Color.GREEN)
             state = "done"
-            tasksViewModel.updateState(id,state)
+            tasksViewModel.updateState(id, state)
         }
     }
 
-    fun updatTimer(tv: TextView) {
-        var min = start / 60000
-        val sec = start % 60000 / 1000
+    fun updateTimer(tv: TextView) {
+        var min = timerStartTime / 60000
+        val sec = timerStartTime % 60000 / 1000
 
         if (sec < 10) {
             tv.text = "$min :0$sec"
@@ -133,16 +175,16 @@ class DetailsFragment : Fragment() {
 
     override fun onStop() {
         super.onStop()
-        tasksViewModel.updateTimer(id,start.toString())
+        tasksViewModel.updateTimer(id, timerStartTime.toString())
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
-        tasksViewModel.updateTimer(id,start.toString())
+        tasksViewModel.updateTimer(id, timerStartTime.toString())
     }
 
     override fun onPause() {
         super.onPause()
-        tasksViewModel.updateTimer(id,start.toString())
+        tasksViewModel.updateTimer(id, timerStartTime.toString())
     }
 }
