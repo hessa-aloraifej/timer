@@ -1,24 +1,20 @@
 package com.example.timer.adapters
 
 import android.content.Intent
-import android.os.CountDownTimer
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import android.widget.Toast
-import androidx.core.content.ContextCompat.startActivity
 import androidx.core.view.isVisible
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
+import com.example.timer.ListFragment
 import com.example.timer.R
-import com.example.timer.TasksModelView
 import com.example.timer.TimerDetailsActivity
 import com.example.timer.data.Task
 import kotlinx.android.synthetic.main.item_row.view.*
 
 
-class TasksAdapter() :
+class TasksAdapter(private val listFragment: ListFragment) :
     RecyclerView.Adapter<TasksAdapter.ItemViewHolder>() {
     private var tasksList: List<Task> = listOf()
     // set this class to take position of one item
@@ -49,18 +45,20 @@ class TasksAdapter() :
             tv_taskTitle.text = "${data.task}"
             tv_taskDescription.text = "${data.description}"
             ll_item_row.setOnClickListener {
+
                 // make change to tv timer
                 tv.isVisible = true
 
+                listFragment.viewDetails(data)
 
-                var intent =  Intent(holder.itemView.context, TimerDetailsActivity::class.java)
-                intent.putExtra("noteTitle",data.task )
-                intent.putExtra("noteDescription",data.description )
-                intent.putExtra("expextedTime",data.expextedTime)
-                intent.putExtra("spentTime",data.spentTime)
-                intent.putExtra("id",data.id)
-                intent.putExtra("state",data.state)
-                holder.itemView.context.startActivity(intent)
+//                var intent =  Intent(holder.itemView.context, TimerDetailsActivity::class.java)
+//                intent.putExtra("noteTitle",data.task )
+//                intent.putExtra("noteDescription",data.description )
+//                intent.putExtra("expextedTime",data.expectedTime)
+//                intent.putExtra("spentTime",data.spentTime)
+//                intent.putExtra("id",data.id)
+//                intent.putExtra("state",data.state)
+//                holder.itemView.context.startActivity(intent)
             }
         }
     }

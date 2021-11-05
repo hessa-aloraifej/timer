@@ -3,36 +3,35 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/fragments"
-    app:startDestination="@id/homeFragment">
-
-    <fragment
-        android:id="@+id/homeFragment"
-        android:name="com.example.timer.fragments.HomeFragment"
-        android:label="fragment_home"
-        tools:layout="@layout/fragment_home" >
-        <action
-            android:id="@+id/action_homeFragment_to_listFragment"
-            app:destination="@id/listFragment" />
-    </fragment>
+    app:startDestination="@id/listFragment">
     <fragment
         android:id="@+id/listFragment"
-        android:name="com.example.timer.fragments.ListFragment"
+        android:name="com.example.timer.ListFragment"
         android:label="fragment_list"
         tools:layout="@layout/fragment_list" >
         <action
-            android:id="@+id/action_listFragment_to_addFragment"
-            app:destination="@id/addFragment" />
+            android:id="@+id/action_listFragment_to_detailsFragment"
+            app:destination="@id/detailsFragment" />
         <action
-            android:id="@+id/action_listFragment_to_homeFragment"
-            app:destination="@id/homeFragment" />
+            android:id="@+id/action_listFragment_to_addTaskFragment"
+            app:destination="@id/addTaskFragment" />
     </fragment>
     <fragment
-        android:id="@+id/addFragment"
-        android:name="com.example.timer.fragments.AddTaskFragment"
-        android:label="fragment_add"
-        tools:layout="@layout/fragment_add" >
+        android:id="@+id/detailsFragment"
+        android:name="com.example.timer.DetailsFragment"
+        android:label="fragment_details"
+        tools:layout="@layout/fragment_details" >
         <action
-            android:id="@+id/action_addFragment_to_listFragment"
+            android:id="@+id/action_detailsFragment_to_listFragment"
+            app:destination="@id/listFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addTaskFragment"
+        android:name="com.example.timer.AddTaskFragment"
+        android:label="fragment_add_task"
+        tools:layout="@layout/fragment_add_task" >
+        <action
+            android:id="@+id/action_addTaskFragment_to_listFragment"
             app:destination="@id/listFragment" />
     </fragment>
 </navigation>
