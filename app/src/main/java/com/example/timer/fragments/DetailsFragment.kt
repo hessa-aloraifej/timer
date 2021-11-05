@@ -1,9 +1,8 @@
-package com.example.timer
+package com.example.timer.fragments
 
 import android.graphics.Color
 import android.os.Bundle
 import android.os.CountDownTimer
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -12,6 +11,8 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
+import com.example.timer.R
+import com.example.timer.viewmodel.TasksModelView
 
 class DetailsFragment : Fragment() {
 

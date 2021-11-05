@@ -1,17 +1,10 @@
 package com.example.timer.adapters
 
-import android.content.Intent
-import android.text.SpannableString
-import android.text.Spanned
-import android.text.TextPaint
-import android.text.method.LinkMovementMethod
-import android.text.style.ClickableSpan
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
-import com.example.timer.MainActivity
+import com.example.timer.activities.MainActivity
 import com.example.timer.R
 import com.example.timer.data.SlideData
 import kotlinx.android.synthetic.main.column_item.view.*

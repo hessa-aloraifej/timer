@@ -1,7 +1,8 @@
-package com.example.timer
+package com.example.timer.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.timer.R
 
 class TrackActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

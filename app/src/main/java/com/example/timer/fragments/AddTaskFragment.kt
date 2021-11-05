@@ -1,4 +1,4 @@
-package com.example.timer
+package com.example.timer.fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -8,11 +8,13 @@ import android.view.ViewGroup
 import android.widget.*
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
+import androidx.navigation.Navigator
+import com.example.timer.R
+import com.example.timer.viewmodel.TasksModelView
 
 class AddTaskFragment : Fragment() {
     private val tasksViewModel by lazy { ViewModelProvider(this).get(TasksModelView::class.java) }
     lateinit var fragmentView: View
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -27,6 +29,12 @@ class AddTaskFragment : Fragment() {
         val seekBarTimer = fragmentView.findViewById<SeekBar>(R.id.seekBarTimer)
         val tvExpectedTimeTask = fragmentView.findViewById<TextView>(R.id.tvExpectedTimeTask)
         val addBtnAlert = fragmentView.findViewById<Button>(R.id.btn_addAlert)
+        val backButton = fragmentView.findViewById<ImageButton>(R.id.backBtn_addFragment)
+
+        backButton.setOnClickListener{
+            Navigation.findNavController(fragmentView)
+                .navigate(R.id.action_addTaskFragment_to_listFragment)
+        }
 
         taskNameAlert.hint = "Enter Task Name"
         taskDescriptionAlert.hint = "Enter Task Description"
@@ -74,6 +82,5 @@ class AddTaskFragment : Fragment() {
 
         return fragmentView
     }
-
 
 }

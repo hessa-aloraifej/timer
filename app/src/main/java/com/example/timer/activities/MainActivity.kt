@@ -1,4 +1,4 @@
-package com.example.timer
+package com.example.timer.activities
 
 import android.content.Intent
 import android.content.SharedPreferences
@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import androidx.viewpager2.widget.ViewPager2
+import com.example.timer.R
 import com.example.timer.adapters.ViewPagerAdapter
 import com.example.timer.data.SlideData
 import kotlinx.android.synthetic.main.activity_main.*
@@ -27,7 +28,7 @@ class MainActivity : AppCompatActivity() {
         sharedPreferences = getSharedPreferences("com.example.timer", MODE_PRIVATE)
         val readInstructions = sharedPreferences.getInt("read", 0)
 
-        if (readInstructions > 0) {
+        if (readInstructions == 0) {
             main_screen.visibility = View.VISIBLE
             generate()
 

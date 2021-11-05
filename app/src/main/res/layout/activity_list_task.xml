@@ -5,46 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/bg_blue_purple_gradient"
-    tools:context=".ListTaskActivity">
+    tools:context=".activities.ListTaskActivity">
 
-
-<!--    <androidx.recyclerview.widget.RecyclerView-->
-<!--        android:id="@+id/rv_tasks"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="match_parent"-->
-<!--        android:layout_marginBottom="50dp"-->
-<!--        android:layout_marginHorizontal="15dp"-->
-<!--        android:layout_marginTop="15dp"-->
-<!--        android:background="@drawable/bg_rounded"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="parent"-->
-<!--        />-->
-
-<!--    &lt;!&ndash;    <ImageButton&ndash;&gt;-->
-<!--    &lt;!&ndash;        android:id="@+id/btn_addTask"&ndash;&gt;-->
-<!--    &lt;!&ndash;        android:layout_width="50dp"&ndash;&gt;-->
-<!--    &lt;!&ndash;        android:layout_height="50dp"&ndash;&gt;-->
-<!--    &lt;!&ndash;        android:src="@android:drawable/ic_input_add"&ndash;&gt;-->
-<!--    &lt;!&ndash;        app:layout_constraintBottom_toBottomOf="parent"&ndash;&gt;-->
-<!--    &lt;!&ndash;        app:layout_constraintEnd_toEndOf="parent"&ndash;&gt;-->
-<!--    &lt;!&ndash;        app:layout_constraintStart_toStartOf="parent" />&ndash;&gt;-->
-
-<!--    <com.google.android.material.floatingactionbutton.FloatingActionButton-->
-<!--        android:id="@+id/btn_addTask"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:backgroundTint="@color/red_500"-->
-<!--        app:borderWidth="0dp"-->
-<!--        android:clickable="true"-->
-<!--        android:layout_margin="20dp"-->
-<!--        android:src="@drawable/icon_add"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:maxImageSize="40dp"-->
-<!--        app:tint="@color/white" />-->
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragmentContainerView"
         android:name="androidx.navigation.fragment.NavHostFragment"

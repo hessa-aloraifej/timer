@@ -3,62 +3,131 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AddTaskFragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/bg_blue_purple_gradient"
+    tools:context=".fragments.AddTaskFragment">
 
-    <LinearLayout
-        android:id="@+id/linerLayoutId"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
-
-
-
-        <EditText
-            android:id="@+id/edt_taskNameAlert"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="Enter Task Name"
-            android:inputType="textPersonName" />
-
-        <EditText
-            android:id="@+id/edt_taskDescriptionAlert"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="Enter Description Of Task"
-            android:inputType="textPersonName" />
-
+        >
 
         <LinearLayout
-
-            android:id="@+id/linearLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_margin="10dp"
+            android:gravity="center"
+            >
 
-            <SeekBar
-                android:id="@+id/seekBarTimer"
-                android:layout_width="300dp"
+            <ImageButton
+                android:id="@+id/backBtn_addFragment"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:max="100"
-                android:min="10"
-                android:progress="10"
-
+                android:src="@drawable/ic_round_arrow_back_24"
+                android:background="@android:color/transparent"
+               android:layout_margin="10dp"
                 />
 
             <TextView
-                android:id="@+id/tvExpectedTimeTask"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
+                android:layout_height="wrap_content"
+                android:textSize="30dp"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:text="Add Task"
+                />
         </LinearLayout>
 
-        <Button
-            android:id="@+id/btn_addAlert"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="ADD" />
 
-    </LinearLayout>
+        <LinearLayout
+            android:id="@+id/linerLayoutId"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginHorizontal="30dp"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/edt_taskNameAlert"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:layout_marginVertical="5dp"
+                android:paddingHorizontal="10dp"
+                android:background="@drawable/edt_rounded"
+                android:hint="Task Title"
+                android:inputType="textPersonName" />
+
+            <EditText
+                android:id="@+id/edt_taskDescriptionAlert"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:layout_marginVertical="5dp"
+                android:paddingHorizontal="10dp"
+                android:background="@drawable/edt_rounded"
+                android:hint="Task Description"
+                android:inputType="textPersonName" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:text="Task Time:"
+                android:layout_marginStart="5dp"
+                android:textStyle="bold"
+                android:layout_marginVertical="10dp"
+                android:textSize="20dp"/>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/tvExpectedTimeTask"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="60dp"
+                    android:textColor="@color/white"
+                    android:textStyle="bold"
+                    android:text="10"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="12dp"
+                    android:layout_marginStart="10dp"
+                    android:textColor="@color/white"
+                    android:text="Mins"/>
+
+            </LinearLayout>
+
+
+            <SeekBar
+                android:id="@+id/seekBarTimer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:max="90"
+                android:min="5"
+                android:layout_marginTop="10dp"
+                android:progress="15"
+                android:splitTrack="false"
+                android:progressDrawable="@drawable/seekbar_style"
+                android:thumb="@drawable/custom_thumb"
+                />
+
+
+
+            <Button
+                android:id="@+id/btn_addAlert"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="ADD" />
+
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 </FrameLayout>

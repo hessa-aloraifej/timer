@@ -1,10 +1,11 @@
-package com.example.timer
+package com.example.timer.viewmodel
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
 import com.example.timer.data.Task
+import com.example.timer.data.TasksRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 

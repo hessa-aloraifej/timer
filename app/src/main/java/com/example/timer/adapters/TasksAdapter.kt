@@ -1,15 +1,13 @@
 package com.example.timer.adapters
 
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
-import com.example.timer.ListFragment
+import com.example.timer.fragments.ListFragment
 import com.example.timer.R
-import com.example.timer.TimerDetailsActivity
 import com.example.timer.data.Task
 import kotlinx.android.synthetic.main.item_row.view.*
 

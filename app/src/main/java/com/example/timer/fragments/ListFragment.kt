@@ -1,4 +1,4 @@
-package com.example.timer
+package com.example.timer.fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -10,6 +10,8 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.timer.R
+import com.example.timer.viewmodel.TasksModelView
 import com.example.timer.adapters.TasksAdapter
 import com.example.timer.data.Task
 
@@ -20,6 +22,7 @@ class ListFragment : Fragment() {
     lateinit var recyclerView: RecyclerView
     lateinit var tasksAdapter: TasksAdapter
     lateinit var addTaskButton: ImageButton
+    lateinit var backButton: ImageButton
 
 
     override fun onCreateView(
@@ -34,15 +37,20 @@ class ListFragment : Fragment() {
         recyclerView.layoutManager = LinearLayoutManager(activity)
 
         addTaskButton = fragmentView.findViewById(R.id.btn_addTask)
-
+        backButton = fragmentView.findViewById(R.id.backBtn_listFragment)
         tasksViewModel.getAllTasks()
         tasksViewModel.getTasksList.observe(viewLifecycleOwner, { list ->
             tasksAdapter.setData(list)
         })
 
+        backButton.setOnClickListener{
+            activity?.onBackPressed()
+        }
         addTaskButton.setOnClickListener {
             addTask()
         }
+
+
 
         return fragmentView
     }

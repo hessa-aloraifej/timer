@@ -1,9 +1,8 @@
-package com.example.timer
+package com.example.timer.data
 
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.example.timer.data.Task
 import com.google.firebase.firestore.FirebaseFirestore
 
 class TasksRepository {
