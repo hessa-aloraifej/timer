@@ -36,7 +36,6 @@
         android:layout_height="wrap_content"
         android:backgroundTint="@color/red_500"
         app:borderWidth="0dp"
-        android:clickable="true"
         android:layout_margin="20dp"
         android:src="@drawable/icon_add"
         app:layout_constraintBottom_toBottomOf="parent"
