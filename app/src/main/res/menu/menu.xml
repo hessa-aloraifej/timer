@@ -3,19 +3,22 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/btn_menu_notStarted"
-        android:icon="@drawable/complete"
-        android:title="notStarted"
+        android:icon="@drawable/ic_round_play_arrow_24"
+        android:iconTint="@color/red_500"
+        android:title="To Start"
         />
 
     <item
         android:id="@+id/btn_menu_notCompleted"
-        android:icon="@drawable/complete"
-        android:title="notCompleted"
+        android:icon="@drawable/ic_round_pause_24"
+        android:iconTint="@color/purple_500"
+        android:title="In Progress"
         />
 
     <item
         android:id="@+id/btn_menu_completed"
-        android:icon="@drawable/complete"
-        android:title="completed"
+        android:icon="@drawable/ic_round_done_24"
+        android:iconTint="@color/teal_500"
+        android:title="Completed"
         />
 </menu>

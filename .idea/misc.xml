@@ -5,11 +5,13 @@
       <map>
         <entry key="../../../../../layout/custom_preview.xml" value="0.1390625" />
         <entry key="app/src/main/res/drawable-v24/bg_circle_teal.xml" value="0.2609375" />
+        <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.14010416666666667" />
         <entry key="app/src/main/res/drawable/bg_blue_purple_gradient.xml" value="0.2609375" />
         <entry key="app/src/main/res/drawable/bg_blue_red_gradient.xml" value="0.2609375" />
         <entry key="app/src/main/res/drawable/bg_blue_teal_gradient.xml" value="0.2609375" />
         <entry key="app/src/main/res/drawable/bg_circle.xml" value="0.14010416666666667" />
         <entry key="app/src/main/res/drawable/bg_circle_purple.xml" value="0.2609375" />
+        <entry key="app/src/main/res/drawable/bg_circle_red.xml" value="0.14010416666666667" />
         <entry key="app/src/main/res/drawable/bg_round_purple.xml" value="0.2609375" />
         <entry key="app/src/main/res/drawable/bg_round_red.xml" value="0.2609375" />
         <entry key="app/src/main/res/drawable/bg_round_teal.xml" value="0.2609375" />
@@ -20,6 +22,7 @@
         <entry key="app/src/main/res/drawable/custom_thumb.xml" value="0.2609375" />
         <entry key="app/src/main/res/drawable/edt_rounded.xml" value="0.2609375" />
         <entry key="app/src/main/res/drawable/ic_round_arrow_back_24.xml" value="0.2609375" />
+        <entry key="app/src/main/res/drawable/nostarted_icon.xml" value="0.14010416666666667" />
         <entry key="app/src/main/res/drawable/seekbar_progress.xml" value="0.2609375" />
         <entry key="app/src/main/res/drawable/seekbar_style.xml" value="0.2609375" />
         <entry key="app/src/main/res/layout/activity_add_task.xml" value="0.25" />
@@ -27,19 +30,26 @@
         <entry key="app/src/main/res/layout/activity_list_task.xml" value="0.159375" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_timer_details.xml" value="0.24479166666666666" />
+        <entry key="app/src/main/res/layout/activity_track.xml" value="0.125" />
         <entry key="app/src/main/res/layout/activity_view_tasks.xml" value="0.25" />
         <entry key="app/src/main/res/layout/add_task_alert.xml" value="0.18020833333333333" />
         <entry key="app/src/main/res/layout/ca.xml" value="0.24479166666666666" />
         <entry key="app/src/main/res/layout/column_item.xml" value="0.24479166666666666" />
         <entry key="app/src/main/res/layout/fragment_add.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_add_task.xml" value="0.165" />
+        <entry key="app/src/main/res/layout/fragment_completed.xml" value="0.12395833333333334" />
         <entry key="app/src/main/res/layout/fragment_details.xml" value="0.375" />
         <entry key="app/src/main/res/layout/fragment_edit_task.xml" value="0.24479166666666666" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_hoome.xml" value="0.11068895643363728" />
         <entry key="app/src/main/res/layout/fragment_list.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/fragment_not_started.xml" value="0.12395833333333334" />
+        <entry key="app/src/main/res/layout/fragment_started.xml" value="0.335" />
         <entry key="app/src/main/res/layout/fragment_view_task.xml" value="0.19635416666666666" />
         <entry key="app/src/main/res/layout/item_row.xml" value="0.45" />
+        <entry key="app/src/main/res/layout/not_started_item.xml" value="0.12395833333333334" />
+        <entry key="app/src/main/res/layout/track_row_item.xml" value="0.375" />
+        <entry key="app/src/main/res/menu/menu.xml" value="0.12395833333333334" />
       </map>
     </option>
   </component>

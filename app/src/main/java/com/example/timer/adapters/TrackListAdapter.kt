@@ -3,39 +3,35 @@ package com.example.timer.adapters
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.timer.fragments.ListFragment
 import com.example.timer.R
 import com.example.timer.data.Task
 import kotlinx.android.synthetic.main.item_row.view.*
+import kotlinx.android.synthetic.main.item_row.view.img_colorBox
+import kotlinx.android.synthetic.main.item_row.view.ll_item_row_colorBox
+import kotlinx.android.synthetic.main.item_row.view.tv_taskDescription
+import kotlinx.android.synthetic.main.item_row.view.tv_taskTitle
+import kotlinx.android.synthetic.main.track_row_item.view.*
 
+class TrackListAdapter: RecyclerView.Adapter<TrackListAdapter.ItemViewHolder>() {
+    class ItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 
-class TasksAdapter(private val listFragment: ListFragment) :
-    RecyclerView.Adapter<TasksAdapter.ItemViewHolder>() {
-    private var tasksList: List<Task> = listOf()
-
-    // set this class to take position of one item
-    inner class ItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        init {
-            itemView.setOnClickListener { v: View ->
-                val position: Int = adapterPosition
-            }
-        }
-    }
+    private var tasks = mutableListOf<Task>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
         return ItemViewHolder(
             LayoutInflater.from(parent.context).inflate(
-                R.layout.item_row,
+                R.layout.track_row_item,
                 parent,
                 false
             )
         )
     }
 
-
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
-        val data = tasksList[position]
+        val data = tasks[position]
+        val time = getTime(data.spentTime.toLong())
         holder.itemView.apply {
 
             when (data.state) {
@@ -50,7 +46,8 @@ class TasksAdapter(private val listFragment: ListFragment) :
                     img_colorBox.setImageResource(R.drawable.ic_round_pause_24)
                 }
                 "notStarted" -> {
-                    ll_item_row_colorBox.background = resources.getDrawable(R.drawable.bg_round_red)
+                    ll_item_row_colorBox.background =
+                        resources.getDrawable(R.drawable.bg_round_red)
                     img_colorBox.setImageResource(R.drawable.ic_round_play_arrow_24)
                 }
                 else -> {
@@ -59,18 +56,29 @@ class TasksAdapter(private val listFragment: ListFragment) :
                 }
             }
 
+            tv_taskTime.text = "$time"
             tv_taskTitle.text = "${data.task}"
             tv_taskDescription.text = "${data.description}"
-            ll_item_row.setOnClickListener {
-                listFragment.viewDetails(data)
-            }
+
         }
     }
 
-    override fun getItemCount(): Int = tasksList.size
+    override fun getItemCount(): Int = tasks.size
 
-    fun setData(tasks: List<Task>) {
-        this.tasksList = tasks
+    fun replaceItems(tasks: MutableList<Task>) {
+        this.tasks = tasks
         notifyDataSetChanged()
+    }
+
+    fun getTime(time: Long) : String{
+        var min = time / 60000
+        val sec = time % 60000 / 1000
+
+        return if (sec < 10) {
+            "$min :0$sec"
+        } else {
+            "$min :$sec"
+        }
+
     }
 }

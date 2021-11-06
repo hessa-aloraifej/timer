@@ -1,23 +1,20 @@
 package com.example.timer.fragments
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.timer.R
 import com.example.timer.activities.TrackActivity
-import com.example.timer.data.Task
+import com.example.timer.adapters.TrackListAdapter
 import kotlinx.android.synthetic.main.fragment_started.view.*
-import kotlinx.android.synthetic.main.item_row.view.*
 
 class StartedFragment: Fragment() {
 
-    private lateinit var adapter: StartedAdapter
-
+    private lateinit var adapter: TrackListAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -26,50 +23,20 @@ class StartedFragment: Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_started, container, false)
 
-        adapter = StartedAdapter()
+        adapter = TrackListAdapter()
 
-        adapter.replaceItems(TrackActivity.startedList)
+        adapter.replaceItems(TrackActivity.startedListObj)
         view.rv_started_tasks.adapter = adapter
         view.rv_started_tasks.layoutManager = LinearLayoutManager(context)
         view.rv_started_tasks.hasFixedSize()
 
+        val numOfTasksTextView = view.findViewById<TextView>(R.id.tv_NumOfTasks)
+        val allTasksTextView = view.findViewById<TextView>(R.id.tv_AllTasks)
 
+        numOfTasksTextView.text = TrackActivity.startedListObj.size.toString()
+        allTasksTextView.text = "/${TrackActivity.startedListObj.size + TrackActivity.notStartedListObj.size + TrackActivity.completedListObj.size}"
 
         return view
     }
-
-
-    class StartedAdapter: RecyclerView.Adapter<StartedAdapter.ItemViewHolder>(){
-        class ItemViewHolder(itemView: View): RecyclerView.ViewHolder(itemView)
-
-        private var tasks = mutableListOf<Task>()
-
-        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
-            return ItemViewHolder(
-                LayoutInflater.from(parent.context).inflate(
-                    R.layout.not_started_item,
-                    parent,
-                    false
-                )
-            )
-        }
-
-        override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
-            val data = tasks[position]
-            holder.itemView.apply {
-                tv_taskTitle.text = data.task
-                tv_taskDescription.text = data.description
-            }
-        }
-
-        override fun getItemCount(): Int = tasks.size
-
-        fun replaceItems(tasks: MutableList<Task>) {
-            this.tasks = tasks
-            Log.w("ooppoopp", this.tasks.toString())
-            notifyDataSetChanged()
-        }
-    }
-
 
 }

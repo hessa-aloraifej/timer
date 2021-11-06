@@ -192,7 +192,7 @@ class DetailsFragment : Fragment() {
         doneButton.visibility = View.INVISIBLE
         timerLayout.background = resources.getDrawable(R.drawable.bg_circle_teal)
         detailsFrameLayout.background = resources.getDrawable(R.drawable.bg_blue_teal_gradient)
-        stateTextView.text = "Done"
+        stateTextView.text = "Completed"
         stateTextView.setTextColor(resources.getColor(R.color.teal_500))
         editButton.visibility = View.GONE
 
@@ -210,7 +210,7 @@ class DetailsFragment : Fragment() {
         doneButton.visibility = View.INVISIBLE
         timerLayout.background = resources.getDrawable(R.drawable.bg_circle_red)
         detailsFrameLayout.background = resources.getDrawable(R.drawable.bg_blue_red_gradient)
-        stateTextView.text = "Not Started"
+        stateTextView.text = "To Start"
         stateTextView.setTextColor(resources.getColor(R.color.red_500))
 
 

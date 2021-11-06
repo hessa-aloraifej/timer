@@ -1,6 +1,7 @@
 package com.example.timer.activities
 
 import android.os.Bundle
+import android.widget.ImageButton
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.timer.R
@@ -16,27 +17,38 @@ class TrackActivity : AppCompatActivity() {
     companion object{
         var db = Firebase.firestore
         var getData = false
-        var notStartedList = mutableListOf<Task>()
-        var startedList = mutableListOf<Task>()
-        var completedList = mutableListOf<Task>()
+        var notStartedListObj = mutableListOf<Task>()
+        var startedListObj = mutableListOf<Task>()
+        var completedListObj = mutableListOf<Task>()
     }
 
     private lateinit var completed: CompletedFragment
     private  var completedList = mutableListOf<Task>()
 
     private lateinit var started: StartedFragment
-    private val startedList = mutableListOf<Task>()
+    private var startedList = mutableListOf<Task>()
 
     private lateinit var notStarted: NotStartedFragment
-    private val notStartedList = mutableListOf<Task>()
+    private var notStartedList = mutableListOf<Task>()
 
-
-
-
+    lateinit var backButton: ImageButton
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_track)
+
+        //hide the action bar
+        supportActionBar?.hide()
+
+        backButton = findViewById(R.id.backBtn_trackActivity)
+        backButton.setOnClickListener{
+            getData = false
+            startedListObj = mutableListOf()
+            completedListObj = mutableListOf()
+            notStartedListObj = mutableListOf()
+            finish()
+
+        }
 
         completed = CompletedFragment()
         started = StartedFragment()
@@ -46,7 +58,9 @@ class TrackActivity : AppCompatActivity() {
 
         bottomNavigation_track.setOnNavigationItemSelectedListener {
             when (it.itemId) {
-                R.id.btn_menu_completed -> replaceFragment(completed, completedList)
+                R.id.btn_menu_completed -> replaceFragment(completed,
+                    completedList
+                )
                 R.id.btn_menu_notCompleted -> replaceFragment(started, startedList)
                 R.id.btn_menu_notStarted -> replaceFragment(notStarted, notStartedList)
             }
