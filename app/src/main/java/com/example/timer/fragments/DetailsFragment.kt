@@ -135,6 +135,7 @@ class DetailsFragment : Fragment() {
         if (state == "notStarted") {
             tasksViewModel.updateState(id, "started")
             doneButton.visibility = View.VISIBLE
+            startedUI()
         }
         timerLayout.background = resources.getDrawable(R.drawable.bg_circle_teal)
         playImageButton.setImageResource(R.drawable.ic_round_pause_24)
@@ -146,7 +147,8 @@ class DetailsFragment : Fragment() {
 
             override fun onFinish() {
                 timerRun = false
-
+                tasksViewModel.updateState(id, "done")
+                doneUI()
             }
         }.start()
         timerRun = true
@@ -191,6 +193,7 @@ class DetailsFragment : Fragment() {
         playImageButton.visibility = View.INVISIBLE
         doneButton.visibility = View.INVISIBLE
         timerLayout.background = resources.getDrawable(R.drawable.bg_circle_teal)
+        timerLayout.isClickable = false
         detailsFrameLayout.background = resources.getDrawable(R.drawable.bg_blue_teal_gradient)
         stateTextView.text = "Completed"
         stateTextView.setTextColor(resources.getColor(R.color.teal_500))
