@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/btn_menu_notStarted"
+        android:icon="@drawable/complete"
+        android:title="notStarted"
+        />
+
+    <item
+        android:id="@+id/btn_menu_notCompleted"
+        android:icon="@drawable/complete"
+        android:title="notCompleted"
+        />
+
+    <item
+        android:id="@+id/btn_menu_completed"
+        android:icon="@drawable/complete"
+        android:title="completed"
+        />
+</menu>
