@@ -9,20 +9,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Timer">
-        <activity android:name=".activities.TrackActivity"></activity>
-        <activity android:name=".fragments.TrackActivity" />
+        <activity
+            android:name=".activities.TrackActivity"
+            android:exported="true" />
         <activity
             android:name=".activities.HomeActivity"
             android:exported="true"
             android:label="Home" />
         <activity
-            android:name=".TimerDetailsActivity"
-            android:exported="true" />
-        <activity
             android:name=".activities.ListTaskActivity"
-            android:exported="true" />
-        <activity
-            android:name=".AddTaskActivity"
             android:exported="true" />
         <activity
             android:name=".activities.MainActivity"

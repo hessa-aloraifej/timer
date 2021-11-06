@@ -9,11 +9,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.timer.R
-import com.example.timer.TrackActivity
+import com.example.timer.activities.TrackActivity
 import com.example.timer.data.Task
-import kotlinx.android.synthetic.main.fragment_not_started.*
-import kotlinx.android.synthetic.main.fragment_not_started.view.*
-import kotlinx.android.synthetic.main.fragment_started.*
 import kotlinx.android.synthetic.main.fragment_started.view.*
 import kotlinx.android.synthetic.main.item_row.view.*
 

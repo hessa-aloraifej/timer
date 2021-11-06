@@ -1,22 +1,16 @@
-package com.example.timer
+package com.example.timer.activities
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import com.example.timer.R
 import com.example.timer.data.Task
 import com.example.timer.fragments.CompletedFragment
 import com.example.timer.fragments.NotStartedFragment
 import com.example.timer.fragments.StartedFragment
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
-import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_track.*
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers.IO
-import kotlinx.coroutines.launch
-
 class TrackActivity : AppCompatActivity() {
 
     companion object{

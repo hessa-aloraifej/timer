@@ -9,15 +9,17 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.timer.R
-import com.example.timer.TrackActivity
-import com.example.timer.TrackActivity.Companion.db
+import com.example.timer.activities.TrackActivity
 import com.example.timer.data.Task
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.fragment_not_started.view.*
 import kotlinx.android.synthetic.main.item_row.view.*
 
 class NotStartedFragment : Fragment() {
 
     private lateinit var adapter: NotStartedAdapter
+    var db = Firebase.firestore
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
