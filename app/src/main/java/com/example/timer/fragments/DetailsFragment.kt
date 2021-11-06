@@ -219,7 +219,7 @@ class DetailsFragment : Fragment() {
     private fun deleteConfirmationDialog() {
         val dialogBuilder = activity?.let { androidx.appcompat.app.AlertDialog.Builder(it) }
 
-        dialogBuilder?.setMessage("Are You Sure To Delete This Note?")
+        dialogBuilder?.setMessage("Are you sure you want to delete this note?")
             ?.setPositiveButton("Delete", DialogInterface.OnClickListener { _, _ ->
                 tasksViewModel.deleteTask(id)
                 Navigation.findNavController(fragmentView)

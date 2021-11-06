@@ -73,7 +73,7 @@ class AddTaskFragment : Fragment() {
                 Navigation.findNavController(fragmentView)
                     .navigate(R.id.action_addTaskFragment_to_listFragment)
             } else {
-                Toast.makeText(activity, "You Should Complete All Information", Toast.LENGTH_SHORT)
+                Toast.makeText(activity, "All fields are required", Toast.LENGTH_SHORT)
                     .show()
             }
         }
